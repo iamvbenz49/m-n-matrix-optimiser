@@ -92,20 +92,34 @@ const Dimension = () => {
   const navigate = useNavigate();
 
   const handleRowsChange = (e) => {
-    setRows(parseInt(e.target.value, 10));
+    setRows(e.target.value);
   };
 
   const handleColumnsChange = (e) => {
-    setColumns(parseInt(e.target.value, 10));
+    setColumns(e.target.value);
   };
 
-  const handleNextButtonClick = () => {
-    // Handle what you want to do when the "Next" button is clicked
-    console.log(`Rows: ${rows}, Columns: ${columns}`);
-    // Add your logic here
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // Navigate to the "Indices" page
-    navigate('/indices');
+    const dimension = {rows,columns};
+    const response = await fetch("http://localhost:5000/dimension", {
+        method:"POST",
+        body: JSON.stringify(dimension),
+        headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        
+        const json = await response
+        console.log(response.ok)
+        if(!response.ok){
+            console.log("Not Done")
+        }
+        if(response.ok){
+          console.log("Done");
+        }
+        navigate('/indices');
   };
 
   const containerStyle = {
@@ -154,20 +168,27 @@ const Dimension = () => {
   };
 
   return (
-    <div style={containerStyle}>
+    <form onSubmit = {handleSubmit}>
+      <div style={containerStyle}>
       <div style={headingStyle}>Enter the Dimension</div>
-      <label style={labelStyle}>
-        <span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Rows:</span>
-        <input type="number" value={rows} onChange={handleRowsChange} style={inputStyle} />
-      </label>
-      <label style={labelStyle}>
-        <span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Columns:</span>
-        <input type="number" value={columns} onChange={handleColumnsChange} style={inputStyle} />
-      </label>
-      <button style={buttonStyle} onClick={handleNextButtonClick} type="button">
-        Next
-      </button>
-    </div>
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Rows:</span></label>
+        <input 
+          type="number" 
+          value={rows} 
+          onChange={handleRowsChange} 
+          style={inputStyle} 
+        />
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Columns:</span> </label>
+        <input 
+          type="number" 
+          value={columns} 
+          onChange={handleColumnsChange} 
+          style={inputStyle} 
+        />
+      
+      <button style={buttonStyle}>Next</button>
+      </div>
+    </form>
   );
 };
 

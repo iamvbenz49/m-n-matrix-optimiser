@@ -1,5 +1,5 @@
 const express = require("express");
-
+const { createDimension } = require("../controllers/controllers")
 const router = express.Router();
 
 router.get("/check", (req,res) => {
@@ -12,10 +12,7 @@ router.post("/check", (req,res) => {
     res.status(200).json({message:"done"});
 });
 
-router.post("/dimension", (req,res) => {
-    console.log("got dimension");
-    res.status(200).json({message:"done"});
-});
+router.post("/dimension",createDimension);
 
 router.post("/matrix", (req,res) => {
     console.log("got matrix");
