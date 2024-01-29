@@ -100,8 +100,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Indices = () => {
-  const [rows, setRows] = useState(1);
-  const [columns, setColumns] = useState(1);
+  const [row, setRows] = useState(1);
+  const [column, setColumns] = useState(1);
   const navigate = useNavigate();
 
   const handleRowsChange = (e) => {
@@ -112,14 +112,48 @@ const Indices = () => {
     setColumns(parseInt(e.target.value, 10));
   };
 
-  const handleCreateButtonClick = () => {
-    // Handle what you want to do when the "Create" button is clicked
-    console.log(`Rows: ${rows}, Columns: ${columns}`);
-    // Add your logic here
-
-    // Navigate to the "MatrixInput" page
+const handleCreateButtonClick = async (e) => {
+    const dimension = {row,column, type:"Last"};
+    const response = await fetch("http://localhost:5000/indices", {
+        method:"POST",
+        body: JSON.stringify(dimension),
+        headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        
+        const json = await response
+        console.log(response.ok)
+        if(!response.ok){
+            console.log("Not Done")
+        }
+        if(response.ok){
+          console.log("Done");
+        }
     navigate('/matrix-input');
-  };
+};
+
+const handleNewIndexButtonClick = async (e) => {
+  e.preventDefault();
+
+  const dimension = {row,column, type:"First"};
+  const response = await fetch("http://localhost:5000/indices", {
+      method:"POST",
+      body: JSON.stringify(dimension),
+      headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      
+      const json = await response
+      console.log(response.ok)
+      if(!response.ok){
+          console.log("Not Done")
+      }
+      if(response.ok){
+        console.log("Done");
+      }
+};
 
   const containerStyle = {
     position: 'absolute',
@@ -165,34 +199,43 @@ const Indices = () => {
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
+    margin:"0.5rem"
   };
 
   const buttonContainerStyle = {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'space-around',
     width: '100%',
     marginTop: '10px',
   };
   return (
-    <div style={containerStyle}>
+    <form >
+      <div style={containerStyle}>
       <div style={headingStyle}>Enter the Indices</div>
-      <label style={labelStyle}>
-        <span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Rows:</span>
-        <input type="number" value={rows} onChange={handleRowsChange} style={inputStyle} />
-      </label>
-      <label style={labelStyle}>
-        <span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Columns:</span>
-        <input type="number" value={columns} onChange={handleColumnsChange} style={inputStyle} />
-      </label>
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Rows:</span></label>
+      <input 
+          type="number" 
+          value={row} 
+          onChange={handleRowsChange} 
+          style={inputStyle} />
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Columns:</span> </label>
+      <input 
+          type="number" 
+          value={column} 
+          onChange={handleColumnsChange} 
+          style={inputStyle} />
+      
       <div style={buttonContainerStyle}>
-        <button style={buttonStyle} onClick={handleCreateButtonClick} type="button">
-          New_Index
+        <button style={buttonStyle} onClick={handleNewIndexButtonClick} type="button">
+          New Index
         </button>
         <button style={buttonStyle} onClick={handleCreateButtonClick} type="button">
           Create
         </button>
       </div>
     </div>
+    </form>
   );
 };
 export default Indices;

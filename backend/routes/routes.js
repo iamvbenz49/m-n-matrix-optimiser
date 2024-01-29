@@ -1,5 +1,5 @@
 const express = require("express");
-const { createDimension } = require("../controllers/controllers")
+const { createDimension, createIndices } = require("../controllers/controllers")
 const router = express.Router();
 
 router.get("/check", (req,res) => {
@@ -11,6 +11,9 @@ router.post("/check", (req,res) => {
     console.log("checked post");
     res.status(200).json({message:"done"});
 });
+
+router.post("/indices", createIndices);
+
 
 router.post("/dimension",createDimension);
 
