@@ -99,9 +99,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Indices = () => {
-  const [row, setRows] = useState(1);
-  const [column, setColumns] = useState(1);
+const Indices = (props) => {
+  const [row, setRows] = useState(0);
+  const [column, setColumns] = useState(0);
   const navigate = useNavigate();
 
   const handleRowsChange = (e) => {
@@ -130,7 +130,7 @@ const handleCreateButtonClick = async (e) => {
         if(response.ok){
           console.log("Done");
         }
-    navigate('/matrix-input');
+    navigate('/search');
 };
 
 const handleNewIndexButtonClick = async (e) => {
@@ -153,8 +153,30 @@ const handleNewIndexButtonClick = async (e) => {
       if(response.ok){
         console.log("Done");
       }
-};
-
+      setRows(0);
+      setColumns(0);
+  };
+  const handleSearchButtonClick = async (e) => {
+    e.preventDefault();
+  
+    const dimension = {row,column, type:"First"};
+    const response = await fetch("http://localhost:5000/indices", {
+        method:"POST",
+        body: JSON.stringify(dimension),
+        headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        
+        const json = await response
+        console.log(response.ok)
+        if(!response.ok){
+            console.log("Not Done")
+        }
+        if(response.ok){
+          console.log("Done");
+        }
+    };
   const containerStyle = {
     position: 'absolute',
     top: '50%',
@@ -212,14 +234,14 @@ const handleNewIndexButtonClick = async (e) => {
   return (
     <form >
       <div style={containerStyle}>
-      <div style={headingStyle}>Enter the Indices</div>
-      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Rows:</span></label>
-      <input 
+      <div style={headingStyle}>{props.title}</div>
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Enter the Row:</span></label>
+      <input
           type="number" 
           value={row} 
           onChange={handleRowsChange} 
           style={inputStyle} />
-      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Columns:</span> </label>
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Enter the Column:</span> </label>
       <input 
           type="number" 
           value={column} 
@@ -227,12 +249,16 @@ const handleNewIndexButtonClick = async (e) => {
           style={inputStyle} />
       
       <div style={buttonContainerStyle}>
-        <button style={buttonStyle} onClick={handleNewIndexButtonClick} type="button">
-          New Index
-        </button>
-        <button style={buttonStyle} onClick={handleCreateButtonClick} type="button">
-          Create
-        </button>
+      {props.title=="Enter the Indices"? <>
+      <button style={buttonStyle} onClick={handleNewIndexButtonClick} type="button">
+        New Index
+      </button>
+      <button style={buttonStyle} onClick={handleCreateButtonClick} type="button">
+        Create
+      </button> </>:<button style={buttonStyle} onClick={handleCreateButtonClick} type="button">
+        Search
+      </button>}
+
       </div>
     </div>
     </form>

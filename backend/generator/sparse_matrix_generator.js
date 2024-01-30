@@ -2,9 +2,9 @@ class optimisedSparseMatrix{
 
   constructor( pincodes,  merchants){
 
-    this.pincodes = pincodes;
+    this.pincodes = pincodes+1;
     this.merchants = merchants;
-    this.matrix = Array.from({ length: pincodes+1 }, () => new Set());
+    this.matrix = Array.from({ length: this.pincodes }, () => new Set());
 
   }
   displayMatrix(){

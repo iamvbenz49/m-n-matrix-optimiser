@@ -61,10 +61,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './Components/HomePage';
-import Dimension from './Components/Dimension';
-import Indices from './Components/Indices';
-import MatrixInput from './Components/MatrixInput'; // Make sure to import the MatrixInput component
+import HomePage from './pages/HomePage';
+import Dimension from './pages/Dimension';
+import  Search  from './pages/Search';
+import  Index  from './pages/Index';
+
 
 function App() {
   return (
@@ -72,9 +73,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dimension" element={<Dimension />} />
-        <Route path="/indices" element={<Indices />} />
-        <Route path="/matrix-input" element={<MatrixInput />} /> {/* Add this line for the MatrixInput component */}
-        {/* Add more routes for other components if needed */}
+        <Route path="/indices" element={<Index/>} />
+        <Route path="/search" element={<Search />} /> {/* Add this line for the MatrixInput component */}
       </Routes>
     </Router>
   );
