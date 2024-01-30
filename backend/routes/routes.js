@@ -1,19 +1,12 @@
 const express = require("express");
-const { createDimension, createIndices } = require("../controllers/controllers")
+const { createDimension, createIndices, createCheck } = require("../controllers/controllers")
 const router = express.Router();
 
-router.get("/check", (req,res) => {
-    console.log("got checked")
-    res.status(200).json({message:"done"});
-});
 
-router.post("/check", (req,res) => {
-    console.log("checked post");
-    res.status(200).json({message:"done"});
-});
+
+router.post("/check", createCheck);
 
 router.post("/indices", createIndices);
-
 
 router.post("/dimension",createDimension);
 

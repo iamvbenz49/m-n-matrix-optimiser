@@ -159,8 +159,8 @@ const handleNewIndexButtonClick = async (e) => {
   const handleSearchButtonClick = async (e) => {
     e.preventDefault();
   
-    const dimension = {row,column, type:"First"};
-    const response = await fetch("http://localhost:5000/indices", {
+    const dimension = {row,column};
+    const response = await fetch("http://localhost:5000/check", {
         method:"POST",
         body: JSON.stringify(dimension),
         headers: {
@@ -168,7 +168,8 @@ const handleNewIndexButtonClick = async (e) => {
           }
         })
         
-        const json = await response
+        const json = await response.json();
+        console.log("result"+json.message);
         console.log(response.ok)
         if(!response.ok){
             console.log("Not Done")
@@ -255,7 +256,7 @@ const handleNewIndexButtonClick = async (e) => {
       </button>
       <button style={buttonStyle} onClick={handleCreateButtonClick} type="button">
         Create
-      </button> </>:<button style={buttonStyle} onClick={handleCreateButtonClick} type="button">
+      </button> </>:<button style={buttonStyle} onClick={handleSearchButtonClick} type="button">
         Search
       </button>}
 
