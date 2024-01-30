@@ -4,7 +4,7 @@ class optimisedSparseMatrix{
 
     this.pincodes = pincodes;
     this.merchants = merchants;
-    this.matrix = Array.from({ length: pincodes }, () => new Set());
+    this.matrix = Array.from({ length: pincodes+1 }, () => new Set());
 
   }
   displayMatrix(){
@@ -19,7 +19,7 @@ class optimisedSparseMatrix{
 
     const setAtIndex = this.matrix[pincode];
     setAtIndex.add(seller);
-
+    console.log(seller)
   }
 
   removeSeller(pincode , seller){

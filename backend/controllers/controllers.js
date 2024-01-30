@@ -14,14 +14,14 @@ const createDimension = async (req,res) => {
 
 const createIndices = async (req,res) => {
     const {row,column,type} = req.body;
-    try{
-       // sparseMatrix.insertSeller(row, col);
+  //  try{
+        sparseMatrix.insertSeller(row, column);
         sparseMatrix.displayMatrix();
         res.status(200).json("sparseMatrix");
-    }catch(error){
-        console.log("wtf")
-        res.status(400).json({erro:error.message})
-    }
+    // }catch(error){
+    //     console.log("wtf")
+    //     res.status(400).json({erro:error.message})
+    // }
 }
 
 module.exports = {
