@@ -1,7 +1,8 @@
 const Matrix = require("../models/matrixModel");
-const optimisedSparseMatrix = require("../generator/sparse_matrix_generator");
+const {optimisedSparseMatrix, optimisedSparseMatrixforDB} = require("../generator/sparse_matrix_generator");
 
 let sparseMatrix;
+let sparseMatrixdb;
 let isAvailable = false;
 
 
@@ -42,13 +43,26 @@ const createCheck = async (req,res) => {
 const getSearchDB = async (req,res) => {
     const db = await Matrix.find();
     console.log(db);
-    res.status(200).json(db);
+    sparseMatrixdb = new optimisedSparseMatrixforDB(db);
     console.log(db[0].pincode+"okk")
 }
+
+const createSearchDB = async (req,res) => {
+    const {row,column} = req.body;
+    try{
+        // console.log(sparseMatrixdb.checkIfAMerchantCanDeliever(row, column))
+        res.status(200).json({message:sparseMatrixdb.checkIfAMerchantCanDeliever(row, column)});
+    }catch(error){
+        console.log(error)
+        res.status(400).json({message:error.message})
+    }
+}
+
 
 module.exports = {
     createDimension,
     createIndices,
     createCheck,
-    getSearchDB
+    getSearchDB,
+    createSearchDB
 }

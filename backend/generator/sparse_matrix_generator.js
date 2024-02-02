@@ -56,7 +56,9 @@ class optimisedSparseMatrixforDB{
     this.merchants = 10;
     this.matrix = Array.from({ length: this.pincodes }, () => new Set());
     db.forEach(document => {
-      matrix[document.pincode].add(new Set(document.merchants))
+      let set = new Set(document.merchants)
+      console.log(set)
+      this.matrix[document.pincode] = set;
     });
 
   }
@@ -91,6 +93,10 @@ class optimisedSparseMatrixforDB{
   checkIfAMerchantCanDeliever( pincode, seller ){
 
     const sellers = this.matrix[pincode];
+    sellers.forEach(sell => {
+      console.log(sell);
+    })
+    console.log(sellers,seller,sellers.has(seller))
     return sellers.has(seller);
 
   }

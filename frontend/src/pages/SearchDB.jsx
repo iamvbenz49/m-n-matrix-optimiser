@@ -7,13 +7,15 @@ import Matrixdata from '../Components/Matrixdata';
 const SearchDB = () => {
     const [row, setRows] = useState(0);
     const [column, setColumns] = useState(0);
+    const [result,setResult] = useState(null);
     const handleRowsChange = (e) => {
         setRows(parseInt(e.target.value, 10));
     };
     
-      const handleColumnsChange = (e) => {
+    const handleColumnsChange = (e) => {
         setColumns(parseInt(e.target.value, 10));
     };
+    
     useEffect(() => {
       const fetchMatrix = async () => {
         const response = await fetch("http://localhost:5000/searchdb");
@@ -24,26 +26,30 @@ const SearchDB = () => {
     }, [])
     const navigate = useNavigate();
     const handleSearchButtonClick = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
       
-        // const dimension = {row,column};
-        // const response = await fetch("http://localhost:5000/check", {
-        //     method:"POST",
-        //     body: JSON.stringify(dimension),
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //       }
-        //     })
+        const dimension = {row,column};
+        const response = await fetch("http://localhost:5000/searchdb", {
+            method:"POST",
+            body: JSON.stringify(dimension),
+            headers: {
+                "Content-Type": "application/json"
+              }
+            })
             
-        //     const json = await response.json();
-        //     console.log("result"+json.message);
-        //     console.log(response.ok)
-        //     if(!response.ok){
-        //         console.log("Not Done")
-        //     }
-        //     if(response.ok){
-        //       console.log("Done");
-        //     }
+            const json = await response.json();
+            console.log(json);
+            console.log(response.ok)
+            if(!response.ok){
+                console.log("Not Done search")
+            }
+            if(response.ok){
+              console.log("Done search");
+            }
+            if(json.message)
+              setResult("YES");
+            else
+              setResult("NO");
       };
     const containerStyle = {
         position: 'absolute',
@@ -124,7 +130,7 @@ const SearchDB = () => {
           </div>
         </div>
         </form>
-        <Matrixdata result = {"YES"}/>
+        {result!=null &&  <Matrixdata result = {result}/>}
         </div>
       );
 }

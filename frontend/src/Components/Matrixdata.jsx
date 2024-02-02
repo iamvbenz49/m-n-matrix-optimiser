@@ -93,18 +93,17 @@
 import React, { useState } from 'react';
 
 const Matrixdata = (props) => {
-  const [result, setResult] = useState("NO");
 
-  const handleNextButtonClick = () => {
-    // Generate a random result
-    const randomResult = Math.random() < 0.5 ? 'Yes' : 'No';
-    setResult(randomResult);
+  // const handleNextButtonClick = () => {
+  //   // Generate a random result
+  //   const randomResult = Math.random() < 0.5 ? 'Yes' : 'No';
+  //   setResult(randomResult);
 
-    // Hide the result after 3 seconds
-    setTimeout(() => {
-      setResult(null);
-    }, 3000);
-  };
+  //   // Hide the result after 3 seconds
+  //   setTimeout(() => {
+  //     setResult(null);
+  //   }, 3000);
+  // };
 
   const getMainBoxStyle = () => {
     return {
@@ -130,7 +129,7 @@ const Matrixdata = (props) => {
       }}
     >
       
-      {result && <div style={getResultBoxStyle()}>{result}</div>}
+       <div style={getResultBoxStyle()}>{props.result}</div>
     </div>
   );
   
