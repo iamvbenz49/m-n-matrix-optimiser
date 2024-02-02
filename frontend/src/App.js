@@ -65,7 +65,7 @@ import HomePage from './pages/HomePage';
 import Dimension from './pages/Dimension';
 import  Search  from './pages/Search';
 import  Index  from './pages/Index';
-
+import SearchDB from './pages/SearchDB';
 
 function App() {
   return (
@@ -75,6 +75,7 @@ function App() {
         <Route path="/dimension" element={<Dimension />} />
         <Route path="/indices" element={<Index/>} />
         <Route path="/search" element={<Search />} /> {/* Add this line for the MatrixInput component */}
+        <Route path="/searchdb" element={<SearchDB />} />
       </Routes>
     </Router>
   );

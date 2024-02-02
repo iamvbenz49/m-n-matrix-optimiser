@@ -48,5 +48,61 @@ class optimisedSparseMatrix{
   }
 }
 
-module.exports = optimisedSparseMatrix;
+
+class optimisedSparseMatrixforDB{
+
+  constructor( db){
+    this.pincodes = 10;
+    this.merchants = 10;
+    this.matrix = Array.from({ length: this.pincodes }, () => new Set());
+    db.forEach(document => {
+      matrix[document.pincode].add(new Set(document.merchants))
+    });
+
+  }
+  displayMatrix(){
+
+    this.matrix.forEach((set, pincode) => {
+      console.log(`At pincode ${pincode}:`, set);
+    });    
+
+  }
+
+  insertSeller( pincode, seller){
+
+    const setAtIndex = this.matrix[pincode];
+    setAtIndex.add(seller);
+    console.log(seller)
+  }
+
+  removeSeller(pincode , seller){
+
+    const sellers = this.matrix[pincode];
+    const isDeleted = sellers.delete(seller);
+
+    return isDeleted;
+
+  }
+  getMatrix(){
+
+    return this.displayMatrix;
+
+  }
+  checkIfAMerchantCanDeliever( pincode, seller ){
+
+    const sellers = this.matrix[pincode];
+    return sellers.has(seller);
+
+  }
+  getMerchantsAtPincode(pincode){
+
+    return this.matrix[pincode];
+
+  }
+}
+
+module.exports = {
+                optimisedSparseMatrix,
+                optimisedSparseMatrixforDB
+              };
 

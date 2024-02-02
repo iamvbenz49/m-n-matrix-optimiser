@@ -1,5 +1,5 @@
 const express = require("express");
-const { createDimension, createIndices, createCheck } = require("../controllers/controllers")
+const { createDimension, createIndices, createCheck, getSearchDB } = require("../controllers/controllers")
 const router = express.Router();
 
 
@@ -10,9 +10,6 @@ router.post("/indices", createIndices);
 
 router.post("/dimension",createDimension);
 
-router.post("/matrix", (req,res) => {
-    console.log("got matrix");
-    res.status(200).json({message:"done"});
-});
+router.get("/searchdb",getSearchDB );
 
 module.exports = router;
