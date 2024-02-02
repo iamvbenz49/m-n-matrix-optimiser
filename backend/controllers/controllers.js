@@ -59,10 +59,22 @@ const createSearchDB = async (req,res) => {
 }
 
 
+const createSearch = async (req,res) => {
+    const {row,column} = req.body;
+    try{
+        // console.log(sparseMatrixdb.checkIfAMerchantCanDeliever(row, column))
+        res.status(200).json({message:sparseMatrixdb.checkIfAMerchantCanDeliever(row, column)});
+    }catch(error){
+        console.log(error)
+        res.status(400).json({message:error.message})
+    }
+}
+
 module.exports = {
     createDimension,
     createIndices,
     createCheck,
     getSearchDB,
-    createSearchDB
+    createSearchDB,
+    createSearch
 }

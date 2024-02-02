@@ -130,7 +130,7 @@ const handleCreateButtonClick = async (e) => {
         if(response.ok){
           console.log("Done");
         }
-    navigate('/search');
+    navigate('/check');
 };
 
 const handleNewIndexButtonClick = async (e) => {

@@ -74,7 +74,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/dimension" element={<Dimension />} />
         <Route path="/indices" element={<Index/>} />
-        <Route path="/search" element={<Search />} /> {/* Add this line for the MatrixInput component */}
+        <Route path="/check" element={<Search />} /> {/* Add this line for the MatrixInput component */}
         <Route path="/searchdb" element={<SearchDB />} />
       </Routes>
     </Router>
