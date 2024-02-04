@@ -18,15 +18,23 @@ const MatrixInput = () => {
   }, [rows, columns]);
 
   // Function to handle changes in the number of rows input
-  const handleRowsChange = (e) => {
-    const newRows = parseInt(e.target.value, 10) || 0;
-    setRows(newRows);
-  };
+  // const handleRowsChange = (e) => {
+  //   const newRows = parseInt(e.target.value, 10) || 0;
+  //   setRows(newRows);
+  // };
 
-  // Function to handle changes in the number of columns input
+  // // Function to handle changes in the number of columns input
+  // const handleColumnsChange = (e) => {
+  //   const newColumns = parseInt(e.target.value, 10) || 0;
+  //   setColumns(newColumns);
+  // };
+  const handleRowsChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setRows(value > 0 ? value : 0);
+  };
   const handleColumnsChange = (e) => {
-    const newColumns = parseInt(e.target.value, 10) || 0;
-    setColumns(newColumns);
+    const value = parseInt(e.target.value, 10);
+    setColumns(value > 0 ? value : 0);
   };
 
   // Function to handle clicking the result button
