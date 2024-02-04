@@ -104,12 +104,20 @@ const Indices = (props) => {
   const [column, setColumns] = useState(0);
   const navigate = useNavigate();
 
-  const handleRowsChange = (e) => {
-    setRows(parseInt(e.target.value, 10));
-  };
+  // const handleRowsChange = (e) => {
+  //   setRows(parseInt(e.target.value, 10));
+  // };
 
+  // const handleColumnsChange = (e) => {
+  //   setColumns(parseInt(e.target.value, 10));
+  // };
+  const handleRowsChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setRows(value > 0 ? value : 0);
+  };
   const handleColumnsChange = (e) => {
-    setColumns(parseInt(e.target.value, 10));
+    const value = parseInt(e.target.value, 10);
+    setColumns(value > 0 ? value : 0);
   };
 
 const handleCreateButtonClick = async (e) => {
