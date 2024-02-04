@@ -244,13 +244,13 @@ const handleNewIndexButtonClick = async (e) => {
     <form >
       <div style={containerStyle}>
       <div style={headingStyle}>{props.title}</div>
-      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Enter the Row:</span></label>
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Enter the Pincode:</span></label>
       <input
           type="number" 
           value={row} 
           onChange={handleRowsChange} 
           style={inputStyle} />
-      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Enter the Column:</span> </label>
+      <label style={labelStyle}><span style={{ fontSize: '1.2em', marginBottom: '5px' }}>Enter the Merchat:</span> </label>
       <input 
           type="number" 
           value={column} 
