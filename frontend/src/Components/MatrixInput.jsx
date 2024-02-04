@@ -66,14 +66,14 @@ const MatrixInput = () => {
         {/* Right Section: Input for Rows and Columns */}
         <div style={{ flex: '1', backgroundColor: '#fff', padding: '20px', borderRadius: '0 8px 8px 0', color: '#333' }}>
           <div>
-            <h3>Rows and Columns</h3>
+            <h3>Pincode and Merchant</h3>
             <label>
-              Rows:
+              Pincode:
               <input type="number" value={rows} onChange={handleRowsChange} style={{ width: '100%', padding: '8px', margin: '8px 0', boxSizing: 'border-box' }} />
             </label>
             <br />
             <label>
-              Columns:
+              Merchant:
               <input type="number" value={columns} onChange={handleColumnsChange} style={{ width: '100%', padding: '8px', margin: '8px 0', boxSizing: 'border-box' }} />
             </label>
           </div>
